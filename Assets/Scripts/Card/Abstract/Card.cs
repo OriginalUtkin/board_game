@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Card
+public abstract class Card: MonoBehaviour
 {
     private Sprite cardFace;
     private Sprite cardBack;
