@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card : MonoBehaviour
+public class CreatureCard: Card 
 {
-   private Sprite cardFace;
-   private Sprite cardBack;
    private int health;
    private int attack;
    private int armor;
 
-   public Card(Sprite cardFace, Sprite cardBack, int health, int attack, int armor){
-       this.cardFace = cardFace;
+   public CreatureCard(Sprite cardFace, Sprite cardBack, int health, int attack, int armor): base(cardFace, cardBack){
        this.health = health;
        this.attack = attack;
        this.armor = armor;
