@@ -7,4 +7,6 @@ Temp/**
 UserSettings/**
 .DS_Store
 .vs
-
+.vscode
+*.sln
+*.csproj
