@@ -1,0 +1,10 @@
+Assets/Standard Assets/**
+Assets/3rdparty/**
+Logs/**
+Library/**
+Packages/packages-lock.json
+Temp/**
+UserSettings/**
+.DS_Store
+.vs
+
