@@ -1,0 +1,9 @@
+{
+    "name": "com.board_game",
+    "version": "1.2.3",
+    "displayName": "GameLogic",
+    "description": "This is an Unity-independent implementation of game logic",
+    "unity": "2020.1",
+    "unityRelease": "4f1"
+  }
+  
