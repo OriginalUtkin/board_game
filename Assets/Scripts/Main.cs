@@ -18,9 +18,9 @@ public class Main : MonoBehaviour
 
     private void CreateNewCard() {
         Debug.Log("creating new card");
+        
         GameObject newCard = Instantiate(simpleCardPrefab, playerHand.transform);
-        newCard.GetComponent<SimpleCard>().cardFaceTemplate = facesPrefabs[0];
-        newCard.GetComponent<SimpleCard>().mainScript = this;
+        newCard.GetComponent<SimpleCard>().Setup(facesPrefabs[0], this);
     }
 
     // Update is called once per frame

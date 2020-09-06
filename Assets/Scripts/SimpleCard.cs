@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class SimpleCard : MonoBehaviour
 {
-    public GameObject cardFaceTemplate;
-    public GameObject cardFace;
-    public GameObject cardBackTemplate;
+    GameObject cardFace;
+    Main mainScript;
 
-    public Main mainScript;
+    public void Setup(GameObject _cardFaceTemplate, Main _mainScript)
+    {
+        cardFace = Instantiate(_cardFaceTemplate, transform);
+        mainScript = _mainScript;
+    }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        cardFace = Instantiate(cardFaceTemplate, transform.position, Quaternion.identity);
-        cardFace.transform.SetParent(transform);
-        // cardFace.transform.position = Vector3.zero;
+    void Start() {
+
     }
+
 
     // Update is called once per frame
     void Update()
