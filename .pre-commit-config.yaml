@@ -1,0 +1,19 @@
+repos:
+    -   repo: https://github.com/pre-commit/pre-commit-hooks
+        rev: v2.3.0
+        hooks:
+        -   id: check-yaml
+        -   id: end-of-file-fixer
+            files: 'Assets/Scripts/.*\.cs'
+            types: ["c#"]
+        -   id: trailing-whitespace
+            files: 'Assets/Scripts/.*\.cs'
+            types: ["c#"]
+    # # does not work now
+    # -   repo: https://github.com/jvstein/pre-commit-dotnet-format
+    #     rev: 'v0.2'
+    #     hooks:
+    #     -   id: dotnet-format
+    #         files: 'Assets/Scripts/.*\.cs'
+    #         types: ["c#"]
+    #         args: ['--workspace', 'Assembly-CSharp.csproj']

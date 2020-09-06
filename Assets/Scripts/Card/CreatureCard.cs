@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreatureCard: Card 
+public class CreatureCard: Card
 {
    private int health;
    private int attack;
