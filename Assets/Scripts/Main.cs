@@ -19,11 +19,6 @@ public class Main : MonoBehaviour
         handDrower.fillStartHand(cardParent: this.playerHand, cardPosition: startCardPosition, _mainScript: this);
     }
 
-    private void fillPlayerHand() {
-         Debug.Log("filling player hand with cards");
-
-    }
-
     // Update is called once per frame
     void Update()
     {
