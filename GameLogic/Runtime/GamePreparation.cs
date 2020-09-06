@@ -9,6 +9,9 @@ namespace BoardGame.Preparation {
         public List<Card> playerSelection;
 
         public PreparationLogic() {
+        }
+
+        public void initialize() {
             collection = new List<Card>();
             for (int i = 0; i < 2; i++) {
                 collection.Add(CardBuilder.create("gnome"));
@@ -18,7 +21,11 @@ namespace BoardGame.Preparation {
             }
 
             playerSelection = new List<Card>();
+
+            playerSelection.Add(CardBuilder.create(Card.Demon));  // just for test
+            playerSelection.Add(CardBuilder.create(Card.Elf));  // just for test
         }
+
     }
 
 
