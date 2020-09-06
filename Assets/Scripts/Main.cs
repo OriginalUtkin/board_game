@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    public GameObject playerHand; 
+    public GameObject playerHand;
     public GameObject playSlot;
 
     public GameObject simpleCardPrefab;
@@ -18,7 +18,7 @@ public class Main : MonoBehaviour
 
     private void CreateNewCard() {
         Debug.Log("creating new card");
-        
+
         GameObject newCard = Instantiate(simpleCardPrefab, playerHand.transform);
         newCard.GetComponent<SimpleCard>().Setup(facesPrefabs[0], this);
     }
@@ -26,7 +26,7 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void PlayCard(SimpleCard card) {
