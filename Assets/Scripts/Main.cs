@@ -13,24 +13,27 @@ public class Main : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.fillPlayerHand(hand_size: 3);
+        this.fillPlayerHand(hand_size: 4);
     }
 
     private void fillPlayerHand(int hand_size) {
-        Debug.Log("filling player hand with cards");
+         Debug.Log("filling player hand with cards");
 
-        Vector3 handPosition = this.playerHand.transform.position;
-        Vector3 cardPosition = new Vector3(x: handPosition.x, y: handPosition.y, z: handPosition.z);
+         Vector3 handPosition = this.playerHand.transform.position;
 
-        int offset = 2;
+         int offset = 2;
 
-        for (int card_counter = 0; card_counter < hand_size; card_counter++){
-            GameObject newCard = Instantiate(original: simpleCardPrefab, position: cardPosition, rotation: Quaternion.identity, parent: playerHand.transform);
-            newCard.GetComponent<SimpleCard>().Setup(facesPrefabs[0], this);
+         int left_side = hand_size / 2;
+         int right_side = hand_size - left_side;
 
-            cardPosition.x += offset;
-        }
+         Vector3 cardPosition = new Vector3(x: handPosition.x - left_side * 1.5f, y: handPosition.y, z: handPosition.z);
 
+         for (int card_counter = 0; card_counter < hand_size; card_counter++){
+             GameObject newCard = Instantiate(original: simpleCardPrefab, position: cardPosition, rotation: Quaternion.identity, parent: playerHand.transform);
+             newCard.GetComponent<SimpleCard>().Setup(facesPrefabs[0], this);
+
+             cardPosition.x += offset;
+         }
     }
 
     // Update is called once per frame
