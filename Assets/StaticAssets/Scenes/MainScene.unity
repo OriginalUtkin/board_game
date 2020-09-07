@@ -195,6 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 497500160}
   - component: {fileID: 497500161}
+  - component: {fileID: 497500162}
   m_Layer: 0
   m_Name: PlayerHand
   m_TagString: Untagged
@@ -223,9 +224,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497500159}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648c82632ab76481fab15ca693c13b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleCardPrefab: {fileID: 696801792466627560, guid: 45bb52c3473f449e2996068196793744, type: 3}
+  facesPrefabs:
+  - {fileID: 1413699333538855551, guid: 6471e7bd121804d85b7c271fa6280f4b, type: 3}
+--- !u!114 &497500162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497500159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb0d09273ca64219adf36da45c19e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   simpleCardPrefab: {fileID: 696801792466627560, guid: 45bb52c3473f449e2996068196793744, type: 3}
