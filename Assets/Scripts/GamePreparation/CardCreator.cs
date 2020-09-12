@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using BoardGame.Cards;
+using UnityEngine;
 public class CardCreator : MonoBehaviour
 {
     public GameObject simpleCardPrefab;
@@ -18,7 +18,8 @@ public class CardCreator : MonoBehaviour
         facesPrefabsDict.Add(Card.Demon, facesPrefabs[3]);
     }
 
-    public GameObject createCard(Card card, Transform parent) {
+    public GameObject createCard(Card card, Transform parent)
+    {
         GameObject newCard = Instantiate(simpleCardPrefab, parent);
         newCard.GetComponent<SimpleCard>().Setup(facesPrefabsDict[card.Name], null);
         return newCard;

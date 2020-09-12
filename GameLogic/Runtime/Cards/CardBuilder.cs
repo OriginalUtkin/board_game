@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 
 
-namespace BoardGame.Cards {
+namespace BoardGame.Cards
+{
 
     public class CardBuilder
     {
         static Dictionary<string, Card> cardTemplates;
 
-        static CardBuilder() {
+        static CardBuilder()
+        {
             cardTemplates = new Dictionary<string, Card>();
             cardTemplates.Add(Card.Gnome, new Card(Card.Gnome, 1, 5));  // TODO load this from yaml config
             cardTemplates.Add(Card.Goblin, new Card(Card.Goblin, 2, 4));
@@ -15,7 +17,8 @@ namespace BoardGame.Cards {
             cardTemplates.Add(Card.Elf, new Card(Card.Elf, 4, 2));
         }
 
-        public static Card create(string name) {
+        public static Card create(string name)
+        {
             return new Card(cardTemplates[name]);
         }
     }

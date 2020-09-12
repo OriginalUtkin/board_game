@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using BoardGame.Cards;
+using UnityEngine;
 public class CardCollection : MonoBehaviour
 {
     public CardCreator cardCreator;
@@ -10,10 +10,12 @@ public class CardCollection : MonoBehaviour
     public float xOffset = -1.72f;
     public float yOffset = 1.72f;
 
-    public void SyncWithCardList(List<Card> cards) {
+    public void SyncWithCardList(List<Card> cards)
+    {
         int currentRowSize = 0;
         int rowNumber = 0;
-        for (int i = 0; i < cards.Count; i++) {
+        for (int i = 0; i < cards.Count; i++)
+        {
             if (currentRowSize == rowSize)
             {
                 rowNumber++;

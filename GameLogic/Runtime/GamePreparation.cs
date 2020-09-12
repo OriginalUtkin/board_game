@@ -1,19 +1,23 @@
 ﻿using System.Collections.Generic;
 using BoardGame.Cards;
 
-namespace BoardGame.Preparation {
+namespace BoardGame.Preparation
+{
 
     public class PreparationLogic
     {
         public List<Card> collection;
         public List<Card> playerSelection;
 
-        public PreparationLogic() {
+        public PreparationLogic()
+        {
         }
 
-        public void initialize() {
+        public void initialize()
+        {
             collection = new List<Card>();
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 2; i++)
+            {
                 collection.Add(CardBuilder.create("gnome"));
                 collection.Add(CardBuilder.create("goblin"));
                 collection.Add(CardBuilder.create("demon"));
