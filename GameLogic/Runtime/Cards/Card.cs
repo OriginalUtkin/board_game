@@ -51,7 +51,7 @@ namespace BoardGame.Cards
 
         public Guid guid
         {
-            get { return this.guid; }
+            get { return this._guid; }
         }
 
     }

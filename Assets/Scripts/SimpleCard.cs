@@ -1,34 +1,29 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleCard : MonoBehaviour
 {
     GameObject cardFace;
-    Main mainScript;
+    Action<SimpleCard> clickAction;
+    public Guid cardGuid;
 
-    public void Setup(GameObject _cardFaceTemplate, Main _mainScript)
+    public void Setup(GameObject _cardFaceTemplate, Action<SimpleCard> _clickAction, Guid _cardGuid)
     {
         cardFace = Instantiate(_cardFaceTemplate, transform);
-        mainScript = _mainScript;
+        clickAction = _clickAction;
+        cardGuid = _cardGuid;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateClickAction(Action<SimpleCard> _clickAction)
     {
-
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        clickAction = _clickAction;
     }
 
     private void OnMouseDown()
     {
         Debug.Log("Mouse down");
-        mainScript.PlayCard(this);
+        clickAction(this);
     }
 }
