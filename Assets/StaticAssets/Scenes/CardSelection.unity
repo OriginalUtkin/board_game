@@ -610,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardCreator: {fileID: 806490042}
+  preparationMain: {fileID: 2104015327}
   rowSize: 4
   xOffset: 1.82
   yOffset: 2.5
@@ -656,6 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01cf067d2f4344d0783463cf2842376f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preparationMain: {fileID: 2104015327}
   cardCreator: {fileID: 806490042}
   yOffset: 1.72
 --- !u!1 &1620857363

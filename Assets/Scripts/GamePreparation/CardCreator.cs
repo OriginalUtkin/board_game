@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using BoardGame.Cards;
 using UnityEngine;
@@ -18,10 +19,10 @@ public class CardCreator : MonoBehaviour
         facesPrefabsDict.Add(Card.Demon, facesPrefabs[3]);
     }
 
-    public GameObject createCard(Card card, Transform parent)
+    public GameObject createCard(Card card, Transform parent, Action<SimpleCard> _clickAction)
     {
         GameObject newCard = Instantiate(simpleCardPrefab, parent);
-        newCard.GetComponent<SimpleCard>().Setup(facesPrefabsDict[card.Name], null);
+        newCard.GetComponent<SimpleCard>().Setup(facesPrefabsDict[card.Name], _clickAction, card.guid);
         return newCard;
     }
 }
