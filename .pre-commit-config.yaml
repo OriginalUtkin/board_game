@@ -9,11 +9,14 @@ repos:
         -   id: trailing-whitespace
             files: 'Assets/Scripts/.*\.cs'
             types: ["c#"]
-    # # does not work now
-    # -   repo: https://github.com/jvstein/pre-commit-dotnet-format
-    #     rev: 'v0.2'
-    #     hooks:
-    #     -   id: dotnet-format
-    #         files: 'Assets/Scripts/.*\.cs'
-    #         types: ["c#"]
-    #         args: ['--workspace', 'Assembly-CSharp.csproj']
+    -   repo: https://github.com/jvstein/pre-commit-dotnet-format
+        rev: 'v0.2'
+        hooks:
+        -   id: dotnet-format
+            files: 'Assets/Scripts/.*\.cs'
+            types: ["c#"]
+            args: ['.', '-f']
+        -   id: dotnet-format
+            files: 'GameLogic/.*\.cs'
+            types: ["c#"]
+            args: ['.', '-f']
