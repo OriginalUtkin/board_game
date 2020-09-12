@@ -7,13 +7,20 @@ namespace BoardGame.Preparation
 
     public class PreparationLogic
     {
+        int collectionRowsCount = 3;
+
         public List<Card> collection;
         public List<Card> playerSelection;
 
-        public PreparationLogic()
+        int selectionTargetSize;
+        public delegate void SelectionFullnessChanged(bool isFull);
+        public SelectionFullnessChanged selectionFullnessChanged;
+        bool selectionIsFull;
+
+        public PreparationLogic(int _selectionTargetSize)
         {
             collection = new List<Card>();
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < collectionRowsCount; i++)
             {
                 collection.Add(CardBuilder.create(Card.Gnome));
                 collection.Add(CardBuilder.create(Card.Goblin));
@@ -23,8 +30,8 @@ namespace BoardGame.Preparation
 
             playerSelection = new List<Card>();
 
-            playerSelection.Add(CardBuilder.create(Card.Demon));  // just for test
-            playerSelection.Add(CardBuilder.create(Card.Elf));  // just for test
+            selectionTargetSize = _selectionTargetSize;
+            selectionIsFull = false;
         }
 
         private static void cardSwapLists(List<Card> from, List<Card> to, Guid cardGuid)
@@ -36,12 +43,25 @@ namespace BoardGame.Preparation
 
         public void moveCardToPlayerSelection(Guid cardGuid)
         {
+            if (selectionIsFull)
+                return;
             cardSwapLists(collection, playerSelection, cardGuid);
+            evaluateSelectionFullness();
+        }
+
+        public void evaluateSelectionFullness()
+        {
+            if (playerSelection.Count == selectionTargetSize)
+            {
+                selectionFullnessChanged(true);
+                selectionIsFull = true;
+            }
         }
 
         public void moveCardToCollection(Guid cardGuid)
         {
             cardSwapLists(playerSelection, collection, cardGuid);
+            selectionIsFull = false;
         }
 
     }

@@ -19,6 +19,7 @@ public class PlayerSelection : MonoBehaviour
             GameObject cardObj = cardsInScene[cards[i].guid];
 
             cardObj.GetComponent<SimpleCard>().UpdateClickAction(preparationMain.moveCardToCollection);
+            cardObj.transform.parent = transform;
             cardObj.transform.localPosition = yOffset * i * Vector3.down;
         }
     }

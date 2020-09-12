@@ -23,7 +23,6 @@ public class SimpleCard : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("Mouse down");
         clickAction(this);
     }
 }

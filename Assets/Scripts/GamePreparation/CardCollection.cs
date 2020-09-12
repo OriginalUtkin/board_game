@@ -30,6 +30,7 @@ public class CardCollection : MonoBehaviour
             GameObject cardObj = cardsInScene[cards[i].guid];
 
             cardObj.GetComponent<SimpleCard>().UpdateClickAction(preparationMain.moveCardToPlayerSelection);
+            cardObj.transform.parent = transform;
             cardObj.transform.localPosition = xOffset * currentRowSize * Vector3.right;
             cardObj.transform.localPosition += yOffset * rowNumber * Vector3.down;
             currentRowSize++;
