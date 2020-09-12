@@ -7,7 +7,8 @@ public class Main : MonoBehaviour
     public GameObject playSlot;
     public GameObject playerHand;
 
-    private Vector3 HandPosition{
+    private Vector3 HandPosition
+    {
         get { return this.playerHand.transform.position; }
     }
 
@@ -25,7 +26,8 @@ public class Main : MonoBehaviour
 
     }
 
-    public void PlayCard(SimpleCard card) {
+    public void PlayCard(SimpleCard card)
+    {
         Debug.Log("playing card");
         Debug.Log(card);
         card.transform.SetParent(playSlot.transform);

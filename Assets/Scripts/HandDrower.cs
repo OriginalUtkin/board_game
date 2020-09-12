@@ -9,7 +9,8 @@ public class HandDrower : MonoBehaviour
     public GameObject simpleCardPrefab;
     public GameObject[] facesPrefabs;
 
-    public static Vector3 calculateStartHandPosition(Vector3 handPositionCoordinate){
+    public static Vector3 calculateStartHandPosition(Vector3 handPositionCoordinate)
+    {
         int left_side = HandDrower.handLimit / 2;
         return handPositionCoordinate + Vector3.left * left_side * 1.5f;
     }
@@ -17,14 +18,15 @@ public class HandDrower : MonoBehaviour
 
     public void fillStartHand(GameObject cardParent, Vector3 cardPosition, Main _mainScript)
     {
-         int offset = 2;
+        int offset = 2;
 
-         for (int card_counter = 0; card_counter < HandDrower.handLimit; card_counter++){
-             GameObject newCard = Instantiate(original: simpleCardPrefab, position: cardPosition, rotation: Quaternion.identity, parent: cardParent.transform);
-             newCard.GetComponent<SimpleCard>().Setup(facesPrefabs[0], _mainScript);
+        for (int card_counter = 0; card_counter < HandDrower.handLimit; card_counter++)
+        {
+            GameObject newCard = Instantiate(original: simpleCardPrefab, position: cardPosition, rotation: Quaternion.identity, parent: cardParent.transform);
+            newCard.GetComponent<SimpleCard>().Setup(facesPrefabs[0], _mainScript);
 
-             cardPosition.x += offset;
-         }
+            cardPosition.x += offset;
+        }
     }
 
     void Start()

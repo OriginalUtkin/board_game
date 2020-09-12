@@ -14,7 +14,8 @@ public class SimpleCard : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
 
     }
 
@@ -25,7 +26,8 @@ public class SimpleCard : MonoBehaviour
 
     }
 
-    private void OnMouseDown() {
+    private void OnMouseDown()
+    {
         Debug.Log("Mouse down");
         mainScript.PlayCard(this);
     }
