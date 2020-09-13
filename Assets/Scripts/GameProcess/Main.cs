@@ -1,31 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Main : MonoBehaviour
 {    public GameObject playerHand;
-
-    public GameObject[] playerSlots;
+     public GameObject playerBattlefield;
 
     private SimpleCard selectedCard;
 
-    public SimpleCard SelectedCard{
-        get { return this.selectedCard; }
-    }
-
-
-    private Vector3 HandPosition
+      private Vector3 HandPosition
     {
         get { return this.playerHand.transform.position; }
     }
 
     void Start()
     {
-        this.initPlayerHand();
-        this.initPlayerSlots();
+        this.initialisePlayerHand();
+        this.initialisePlayerBattlefield();
     }
 
-    private void initPlayerHand(){
+    private void initialisePlayerHand(){
         /* Calculate player hand start position and fill it with cards. */
         HandDrower handDrower = this.playerHand.GetComponent<HandDrower>();
 
@@ -33,21 +28,24 @@ public class Main : MonoBehaviour
         handDrower.fillStartHand(cardParent: this.playerHand, cardPosition: startCardPosition, _mainScript: this);
     }
 
-    private void initPlayerSlots(){
-        /* Setup Action field for each player slot on game board. */
+    private void initialisePlayerBattlefield(){
+        /* Setup card movement action for the battlefield. */
+        PlayerBattlefield playArea = this.playerBattlefield.GetComponent<PlayerBattlefield>();
+        playArea.ClickAction = this.clickBattlefield;
     }
 
     public void SelectCard(SimpleCard card)
     {
-        Debug.Log("playing card");
-        Debug.Log(card);
-
+        Debug.Log("Select card: " + card);
         this.selectedCard = card;
-        // card.transform.SetParent(playSlot.transform);
-        // card.transform.position = Vector3.zero;
     }
 
-    // public void PlaySelectedCard(SLOT_OBJECT_NOT_DEFINED cardSlot){
-
-    // }
+    public void clickBattlefield(PlayerBattlefield battlefield){
+        if (this.selectedCard != null){
+            this.selectedCard.transform.SetParent(battlefield.playerSlots[battlefield.NextCardPosition].transform);
+            this.selectedCard.transform.position = battlefield.playerSlots[battlefield.NextCardPosition].transform.position;      
+            
+            battlefield.NextCardPosition += 1;
+        } 
+    }
 }
