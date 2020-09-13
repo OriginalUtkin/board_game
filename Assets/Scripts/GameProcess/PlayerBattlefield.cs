@@ -7,11 +7,12 @@ public class PlayerBattlefield : MonoBehaviour
 {
     public GameObject[] playerSlots;
 
-    public int NextCardPosition{ get; set;} = 0;
+    public int NextCardPosition { get; set; } = 0;
 
-    public Action<PlayerBattlefield> ClickAction{ get; set; }
-    
-    private void OnMouseDown() {
+    public Action<PlayerBattlefield> ClickAction { get; set; }
+
+    private void OnMouseDown()
+    {
         Debug.Log("Player battlefield is clicked");
         this.ClickAction(this);
     }
