@@ -24,7 +24,7 @@ public class HandDrower : MonoBehaviour
         for (int card_counter = 0; card_counter < HandDrower.handLimit; card_counter++)
         {
             GameObject newCard = Instantiate(original: simpleCardPrefab, position: cardPosition, rotation: Quaternion.identity, parent: cardParent.transform);
-            newCard.GetComponent<SimpleCard>().Setup(facesPrefabs[0], _mainScript.PlayCard, Guid.NewGuid());  // TODO sync with GameLogic instead
+            newCard.GetComponent<SimpleCard>().Setup(facesPrefabs[0], _mainScript.SelectCard, Guid.NewGuid());  // TODO sync with GameLogic instead
 
             cardPosition.x += offset;
         }
