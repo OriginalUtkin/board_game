@@ -26,10 +26,10 @@ public class CardCollection : MonoBehaviour
             }
 
             if (!cardsInScene.ContainsKey(cards[i].guid))
-                cardsInScene[cards[i].guid] = cardCreator.createCard(cards[i], transform, preparationMain.moveCardToPlayerSelection);
+                cardsInScene[cards[i].guid] = cardCreator.createCard(cards[i], transform, preparationMain.MoveCardToPlayerSelection);
             GameObject cardObj = cardsInScene[cards[i].guid];
 
-            cardObj.GetComponent<SimpleCard>().UpdateClickAction(preparationMain.moveCardToPlayerSelection);
+            cardObj.GetComponent<SimpleCard>().UpdateClickAction(preparationMain.MoveCardToPlayerSelection);
             cardObj.transform.parent = transform;
             cardObj.transform.localPosition = xOffset * currentRowSize * Vector3.right;
             cardObj.transform.localPosition += yOffset * rowNumber * Vector3.down;

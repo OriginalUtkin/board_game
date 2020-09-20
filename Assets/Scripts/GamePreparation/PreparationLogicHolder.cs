@@ -20,15 +20,15 @@ public class PreparationLogicHolder : MonoBehaviour
     public PreparationLogic player2Preparation;
     public PlayerID currentPlayer;
 
+    bool IsPlayer1Active() { return currentPlayer == PlayerID.Player1; }
+
     public PreparationLogic GetCurrentPreparationLogic()
     {
-        if (currentPlayer == PlayerID.Player1)
-            return player1Preparation;
-        return player2Preparation;
+        return IsPlayer1Active() ? player1Preparation : player2Preparation;
     }
     public void SetCurrentPreparationLogic(PreparationLogic logic)
     {
-        if (currentPlayer == PlayerID.Player1)
+        if (IsPlayer1Active())
             player1Preparation = logic;
         else
             player2Preparation = logic;

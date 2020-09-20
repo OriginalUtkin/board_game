@@ -22,10 +22,10 @@ namespace BoardGame.Preparation
             collection = new List<Card>();
             for (int i = 0; i < collectionRowsCount; i++)
             {
-                collection.Add(CardBuilder.create(Card.Gnome));
-                collection.Add(CardBuilder.create(Card.Goblin));
-                collection.Add(CardBuilder.create(Card.Demon));
-                collection.Add(CardBuilder.create(Card.Elf));
+                collection.Add(CardBuilder.Create(Card.Gnome));
+                collection.Add(CardBuilder.Create(Card.Goblin));
+                collection.Add(CardBuilder.Create(Card.Demon));
+                collection.Add(CardBuilder.Create(Card.Elf));
             }
 
             playerSelection = new List<Card>();
@@ -34,22 +34,22 @@ namespace BoardGame.Preparation
             selectionIsFull = false;
         }
 
-        private static void cardSwapLists(List<Card> from, List<Card> to, Guid cardGuid)
+        private static void CardSwapLists(List<Card> from, List<Card> to, Guid cardGuid)
         {
             int index = from.FindIndex(card => card.guid == cardGuid);
             to.Add(from[index]);
             from.RemoveAt(index);
         }
 
-        public void moveCardToPlayerSelection(Guid cardGuid)
+        public void MoveCardToPlayerSelection(Guid cardGuid)
         {
             if (selectionIsFull)
                 return;
-            cardSwapLists(collection, playerSelection, cardGuid);
-            evaluateSelectionFullness();
+            CardSwapLists(collection, playerSelection, cardGuid);
+            EvaluateSelectionFullness();
         }
 
-        public void evaluateSelectionFullness()
+        public void EvaluateSelectionFullness()
         {
             if (playerSelection.Count == selectionTargetSize)
             {
@@ -58,9 +58,9 @@ namespace BoardGame.Preparation
             }
         }
 
-        public void moveCardToCollection(Guid cardGuid)
+        public void MoveCardToCollection(Guid cardGuid)
         {
-            cardSwapLists(playerSelection, collection, cardGuid);
+            CardSwapLists(playerSelection, collection, cardGuid);
             selectionIsFull = false;
         }
 
