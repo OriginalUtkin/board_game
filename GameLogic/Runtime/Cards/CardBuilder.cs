@@ -17,7 +17,7 @@ namespace BoardGame.Cards
             cardTemplates.Add(Card.Elf, new Card(Card.Elf, 4, 2));
         }
 
-        public static Card create(string name)
+        public static Card Create(string name)
         {
             return new Card(cardTemplates[name]);
         }

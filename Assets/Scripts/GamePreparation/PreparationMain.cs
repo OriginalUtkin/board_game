@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BoardGame.Cards;
 using BoardGame.Preparation;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -26,7 +27,7 @@ public class PreparationMain : MonoBehaviour
 
     // Start is called before the first frame update
 
-    PreparationLogicHolder GetOrCreateHolder()
+    PreparationLogicHolder GetHolder()
     {
         GameObject obj = GameObject.Find("/PreparationLogicHolder");
         PreparationLogicHolder holder;
@@ -53,45 +54,53 @@ public class PreparationMain : MonoBehaviour
     {
         Debug.Log("start preparation main");
 
-        preparationLogicHolder = GetOrCreateHolder();
+        preparationLogicHolder = GetHolder();
         DontDestroyOnLoad(preparationLogicHolder);
 
         logic = preparationLogicHolder.GetCurrentPreparationLogic();
 
         logic.selectionFullnessChanged = null;
-        logic.selectionFullnessChanged += nextButtonFullnessChanged;
+        logic.selectionFullnessChanged += NextButtonFullnessChanged;
 
-        syncCards();
-        configureButtons();
+        SyncCards();
+        ConfigureButtons();
     }
 
-    void configureButtons()
+    static void EnableButton(Button button, string text, UnityAction onClick)
+    {
+        button.gameObject.SetActive(true);
+        if (!(text is null))
+            button.GetComponentInChildren<Text>().text = text;
+        button.onClick.RemoveAllListeners();
+        if (!(onClick is null))
+            button.onClick.AddListener(onClick);
+    }
+    static void DisableButton(Button button)
+    {
+        button.gameObject.SetActive(false);
+    }
+
+    void ConfigureButtons()
     {
         if (preparationLogicHolder.currentPlayer == PreparationLogicHolder.PlayerID.Player1)
         {
-            nextButton.GetComponentInChildren<Text>().text = "Player 2 - choose cards";
-            nextButton.onClick.AddListener(player2ChooseCardsButtonClicked);
-
-            backButton.gameObject.SetActive(false);
+            DisableButton(backButton);
+            EnableButton(nextButton, "Player 2 - choose cards", Player2ChooseCardsButtonClicked);
         }
         else
         {
-            nextButton.GetComponentInChildren<Text>().text = "Start game!";
-            nextButton.onClick.AddListener(startGameClicked);
-
-            backButton.gameObject.SetActive(true);
-            backButton.GetComponentInChildren<Text>().text = "Player 1 - choose cards";
-            backButton.onClick.AddListener(player1ChooseCardsButtonClicked);
+            EnableButton(backButton, "Player 1 - choose cards", Player1ChooseCardsButtonClicked);
+            EnableButton(nextButton, "Start game!", StartGameClicked);
         }
-        logic.evaluateSelectionFullness();
+        logic.EvaluateSelectionFullness();
     }
 
-    void nextButtonFullnessChanged(bool isFull)
+    void NextButtonFullnessChanged(bool isFull)
     {
         nextButton.interactable = isFull;
     }
 
-    public void player1ChooseCardsButtonClicked()
+    public void Player1ChooseCardsButtonClicked()
     {
         Debug.Log("player1ChooseCardsButtonClicked");
 
@@ -100,7 +109,7 @@ public class PreparationMain : MonoBehaviour
 
     }
 
-    public void player2ChooseCardsButtonClicked()
+    public void Player2ChooseCardsButtonClicked()
     {
         Debug.Log("player2ChooseCardsButtonClicked");
 
@@ -109,25 +118,25 @@ public class PreparationMain : MonoBehaviour
 
     }
 
-    void syncCards()
+    void SyncCards()
     {
         cardCollection.SyncWithCardList(logic.collection, cardsInScene);
         playerSelection.SyncWithCardList(logic.playerSelection, cardsInScene);
     }
 
-    public void moveCardToPlayerSelection(SimpleCard card)
+    public void MoveCardToPlayerSelection(SimpleCard card)
     {
-        logic.moveCardToPlayerSelection(card.cardGuid);
-        syncCards();
+        logic.MoveCardToPlayerSelection(card.cardGuid);
+        SyncCards();
     }
 
-    public void moveCardToCollection(SimpleCard card)
+    public void MoveCardToCollection(SimpleCard card)
     {
-        logic.moveCardToCollection(card.cardGuid);
-        syncCards();
+        logic.MoveCardToCollection(card.cardGuid);
+        SyncCards();
     }
 
-    public void startGameClicked()
+    public void StartGameClicked()
     {
         Debug.Log("startGameClicked");
         SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
