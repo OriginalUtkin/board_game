@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BoardGame.Cards;
 using UnityEngine;
+
 public class CardCreator : MonoBehaviour
 {
     public GameObject simpleCardPrefab;
@@ -25,4 +26,13 @@ public class CardCreator : MonoBehaviour
         newCard.GetComponent<SimpleCard>().Setup(facesPrefabsDict[card.Name], _clickAction, card.guid);
         return newCard;
     }
+
+    public GameObject getCard(Dictionary<Guid, GameObject> cardsInScene, Card card, Transform parent, Action<SimpleCard> _clickAction)
+    {
+        if (!cardsInScene.ContainsKey(card.guid))
+            cardsInScene[card.guid] = this.createCard(card, parent, _clickAction);
+        cardsInScene[card.guid].GetComponent<SimpleCard>().UpdateClickAction(_clickAction);
+        return cardsInScene[card.guid];
+    }
+
 }

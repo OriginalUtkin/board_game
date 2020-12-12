@@ -25,8 +25,6 @@ public class PreparationMain : MonoBehaviour
     private PreparationLogic logic;
     private PreparationLogicHolder preparationLogicHolder;
 
-    // Start is called before the first frame update
-
     PreparationLogicHolder GetHolder()
     {
         GameObject obj = GameObject.Find("/PreparationLogicHolder");
@@ -42,7 +40,7 @@ public class PreparationMain : MonoBehaviour
         }
         else
         {
-            Debug.Log("reuse PreparationLogicHolder");
+            Debug.Log("reuse existing PreparationLogicHolder");
             holder = obj.GetComponent<PreparationLogicHolder>();
         }
         if (holder.GetCurrentPreparationLogic() == null)
@@ -50,6 +48,7 @@ public class PreparationMain : MonoBehaviour
         return holder;
     }
 
+    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("start preparation main");
@@ -136,9 +135,15 @@ public class PreparationMain : MonoBehaviour
         SyncCards();
     }
 
+    private void SavePlayerSelection()
+    {
+        logic.SaveToFile(System.IO.Path.Combine(gameObject.scene.path, "../playerSelection.xml"));
+    }
+
     public void StartGameClicked()
     {
         Debug.Log("startGameClicked");
+        this.SavePlayerSelection();
         SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
     }
 

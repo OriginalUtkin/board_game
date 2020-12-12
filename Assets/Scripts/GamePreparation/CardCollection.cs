@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BoardGame.Cards;
 using UnityEngine;
+
 public class CardCollection : MonoBehaviour
 {
     public CardCreator cardCreator;
@@ -25,11 +26,8 @@ public class CardCollection : MonoBehaviour
                 currentRowSize = 0;
             }
 
-            if (!cardsInScene.ContainsKey(cards[i].guid))
-                cardsInScene[cards[i].guid] = cardCreator.createCard(cards[i], transform, preparationMain.MoveCardToPlayerSelection);
-            GameObject cardObj = cardsInScene[cards[i].guid];
+            GameObject cardObj = cardCreator.getCard(cardsInScene, cards[i], transform, preparationMain.MoveCardToPlayerSelection);
 
-            cardObj.GetComponent<SimpleCard>().UpdateClickAction(preparationMain.MoveCardToPlayerSelection);
             cardObj.transform.parent = transform;
             cardObj.transform.localPosition = xOffset * currentRowSize * Vector3.right;
             cardObj.transform.localPosition += yOffset * rowNumber * Vector3.down;
