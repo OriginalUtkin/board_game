@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    public GameObject playerHand;
-    public GameObject playerBattlefield;
+    public HandDrower player1Hand, player2Hand;
+    public PlayerBattlefield playerBattlefield;
 
     private SimpleCard selectedCard;
 
@@ -16,23 +16,30 @@ public class Main : MonoBehaviour
     // used for debugging
     public PreparationLogicHolder preparationLogicHolderPrefab;
 
-    private List<Card> cards = new List<Card>();
+    private List<Card> player1Cards = new List<Card>();
+    private List<Card> player2Cards = new List<Card>();
     private Dictionary<Guid, GameObject> cardsInScene = new Dictionary<Guid, GameObject>();
 
-    private Vector3 HandPosition
+    private Vector3 Player1HandPosition
     {
-        get { return this.playerHand.transform.position; }
+        get { return this.player1Hand.transform.position; }
     }
 
-    private PreparationLogicHolder LoadPlayerSelection()
+    private Vector3 Player2HandPosition
     {
-        Debug.Log("load saved PreparationLogicHolder");
+        get { return this.player2Hand.transform.position; }
+    }
 
-        PreparationLogicHolder holder = Instantiate(preparationLogicHolderPrefab, null);
+    private PreparationLogicHolder LoadPlayerSelections()
+    {
+        PreparationLogicHolder holder;
+        Debug.Log("loading saved PreparationLogicHolder");
+
+        holder = Instantiate(preparationLogicHolderPrefab, null);
         holder.name = "PreparationLogicHolder";
 
-        PreparationLogic logic = PreparationLogic.LoadFromFile(System.IO.Path.Combine(gameObject.scene.path, "../playerSelection.xml"));
-        holder.player1Preparation = logic;
+        holder.player1Preparation = PreparationLogic.LoadFromFile(System.IO.Path.Combine(gameObject.scene.path, "../player1Preparation.xml"));
+        holder.player2Preparation = PreparationLogic.LoadFromFile(System.IO.Path.Combine(gameObject.scene.path, "../player2Preparation.xml"));
         return holder;
     }
 
@@ -42,14 +49,15 @@ public class Main : MonoBehaviour
         PreparationLogicHolder holder;
         if (obj == null)
         {  // used for debugging
-            holder = this.LoadPlayerSelection();
+            holder = this.LoadPlayerSelections();
             obj = holder.gameObject;
         }
         else
         {
             holder = obj.GetComponent<PreparationLogicHolder>();
         }
-        cards = holder.player1Preparation.playerSelection;
+        player1Cards = holder.player1Preparation.playerSelection;
+        player2Cards = holder.player2Preparation.playerSelection;
         return holder;
     }
 
@@ -64,11 +72,13 @@ public class Main : MonoBehaviour
     private void initialisePlayerHand()
     {
         /* Calculate player hand start position and fill it with cards. */
-        HandDrower handDrower = this.playerHand.GetComponent<HandDrower>();
+        Vector3 startCardPosition = HandDrower.calculateStartHandPosition(handPositionCoordinate: this.Player1HandPosition);
+        player1Hand.fillStartHand(cardParent: this.player1Hand.transform, cardPosition: startCardPosition,
+            cards: player1Cards, cardsInScene: cardsInScene, clickAction: this.SelectCard);
 
-        Vector3 startCardPosition = HandDrower.calculateStartHandPosition(handPositionCoordinate: this.HandPosition);
-        handDrower.fillStartHand(cardParent: this.playerHand, cardPosition: startCardPosition,
-            cards: cards, cardsInScene: cardsInScene, clickAction: this.SelectCard);
+        startCardPosition = HandDrower.calculateStartHandPosition(handPositionCoordinate: this.Player2HandPosition);
+        player2Hand.fillStartHand(cardParent: this.player2Hand.transform, cardPosition: startCardPosition,
+            cards: player2Cards, cardsInScene: cardsInScene, clickAction: this.SelectCard);
     }
 
     private void initialisePlayerBattlefield()

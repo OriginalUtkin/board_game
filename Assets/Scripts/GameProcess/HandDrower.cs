@@ -20,26 +20,18 @@ public class HandDrower : MonoBehaviour
     }
 
 
-    public void fillStartHand(GameObject cardParent, Vector3 cardPosition, List<Card> cards, Dictionary<Guid, GameObject> cardsInScene, Action<SimpleCard> clickAction)
+    public void fillStartHand(Transform cardParent, Vector3 cardPosition, List<Card> cards, Dictionary<Guid, GameObject> cardsInScene, Action<SimpleCard> clickAction)
     {
         int offset = 2;
 
         for (int card_counter = 0; card_counter < HandDrower.initialDrawSize; card_counter++)
         {
             if (!cardsInScene.ContainsKey(cards[card_counter].guid))
-                cardsInScene[cards[card_counter].guid] = cardCreator.createCard(cards[card_counter], cardParent.transform, clickAction);
+                cardsInScene[cards[card_counter].guid] = cardCreator.createCard(cards[card_counter], cardParent, clickAction);
             GameObject newCard = cardsInScene[cards[card_counter].guid];
             newCard.transform.position = cardPosition;
             cardPosition.x += offset;
         }
     }
 
-    void Start()
-    {
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

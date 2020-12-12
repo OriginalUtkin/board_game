@@ -135,15 +135,16 @@ public class PreparationMain : MonoBehaviour
         SyncCards();
     }
 
-    private void SavePlayerSelection()
+    private void SavePlayerSelections()
     {
-        logic.SaveToFile(System.IO.Path.Combine(gameObject.scene.path, "../playerSelection.xml"));
+        this.preparationLogicHolder.player1Preparation.SaveToFile(System.IO.Path.Combine(gameObject.scene.path, "../player1Preparation.xml"));
+        this.preparationLogicHolder.player2Preparation.SaveToFile(System.IO.Path.Combine(gameObject.scene.path, "../player2Preparation.xml"));
     }
 
     public void StartGameClicked()
     {
         Debug.Log("startGameClicked");
-        this.SavePlayerSelection();
+        this.SavePlayerSelections();
         SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
     }
 
