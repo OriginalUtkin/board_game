@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using BoardGame.Cards;
 using UnityEngine;
 
 public class HandDrower : MonoBehaviour
 {
-    public readonly static int handLimit = 4;
+    public readonly static int initialDrawSize = 3;
+    public readonly static int handLimit = 5;
 
     public GameObject simpleCardPrefab;
     public GameObject[] facesPrefabs;
+    public CardCreator cardCreator;
 
     public static Vector3 calculateStartHandPosition(Vector3 handPositionCoordinate)
     {
@@ -17,15 +20,16 @@ public class HandDrower : MonoBehaviour
     }
 
 
-    public void fillStartHand(GameObject cardParent, Vector3 cardPosition, Main _mainScript)
+    public void fillStartHand(GameObject cardParent, Vector3 cardPosition, List<Card> cards, Dictionary<Guid, GameObject> cardsInScene, Action<SimpleCard> clickAction)
     {
         int offset = 2;
 
-        for (int card_counter = 0; card_counter < HandDrower.handLimit; card_counter++)
+        for (int card_counter = 0; card_counter < this.initialDrawSize; card_counter++)
         {
-            GameObject newCard = Instantiate(original: simpleCardPrefab, position: cardPosition, rotation: Quaternion.identity, parent: cardParent.transform);
-            newCard.GetComponent<SimpleCard>().Setup(facesPrefabs[0], _mainScript.SelectCard, Guid.NewGuid());  // TODO sync with GameLogic instead
-
+            if (!cardsInScene.ContainsKey(cards[card_counter].guid))
+                cardsInScene[cards[card_counter].guid] = cardCreator.createCard(cards[card_counter], cardParent.transform, clickAction);
+            GameObject newCard = cardsInScene[cards[card_counter].guid];
+            newCard.transform.position = cardPosition;
             cardPosition.x += offset;
         }
     }

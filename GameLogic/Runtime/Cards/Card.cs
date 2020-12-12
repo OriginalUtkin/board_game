@@ -16,6 +16,11 @@ namespace BoardGame.Cards
         private int attack;
         private Guid _guid;
 
+        public Card()
+        {
+            _guid = Guid.NewGuid();
+        }
+
         public Card(string name, int health, int attack)
         {
             this.name = name;
