@@ -24,7 +24,7 @@ public class HandDrower : MonoBehaviour
     {
         int offset = 2;
 
-        for (int card_counter = 0; card_counter < this.initialDrawSize; card_counter++)
+        for (int card_counter = 0; card_counter < HandDrower.initialDrawSize; card_counter++)
         {
             if (!cardsInScene.ContainsKey(cards[card_counter].guid))
                 cardsInScene[cards[card_counter].guid] = cardCreator.createCard(cards[card_counter], cardParent.transform, clickAction);
