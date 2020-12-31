@@ -26,7 +26,7 @@ public class CardCollection : MonoBehaviour
                 currentRowSize = 0;
             }
 
-            GameObject cardObj = cardCreator.getCard(cardsInScene, cards[i], transform, preparationMain.MoveCardToPlayerSelection);
+            GameObject cardObj = cardCreator.getCard(cardsInScene, cards[i], transform);
 
             cardObj.transform.parent = transform;
             cardObj.transform.localPosition = xOffset * currentRowSize * Vector3.right;
