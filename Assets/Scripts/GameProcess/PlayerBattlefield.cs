@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBattlefield : MonoBehaviour
+public class PlayerBattlefield : MonoBehaviour, IInteractable
 {
     public GameObject[] playerSlots;
 
@@ -14,7 +14,11 @@ public class PlayerBattlefield : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("Player battlefield is clicked");
-        this.ClickAction(this);
+    }
+
+    public void RecieveObject(MonoBehaviour obj)
+    {
+        Debug.Log("Object is recieved");
     }
 
 }
