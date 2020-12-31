@@ -14,7 +14,7 @@ public class PlayerSelection : MonoBehaviour
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            GameObject cardObj = cardCreator.getCard(cardsInScene, cards[i], transform, preparationMain.MoveCardToCollection);
+            GameObject cardObj = cardCreator.getCard(cardsInScene, cards[i], transform);
 
             cardObj.transform.parent = transform;
             cardObj.transform.localPosition = yOffset * i * Vector3.down;

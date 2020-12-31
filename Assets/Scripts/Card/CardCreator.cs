@@ -20,18 +20,18 @@ public class CardCreator : MonoBehaviour
         facesPrefabsDict.Add(Card.Demon, facesPrefabs[3]);
     }
 
-    public GameObject createCard(Card card, Transform parent, Action<SimpleCard> _clickAction)
+    public GameObject createCard(Card card, Transform parent)
     {
         GameObject newCard = Instantiate(simpleCardPrefab, parent);
-        newCard.GetComponent<SimpleCard>().Setup(facesPrefabsDict[card.Name], _clickAction, card.guid);
+        newCard.GetComponent<SimpleCard>().Setup(facesPrefabsDict[card.Name], card.guid);
         return newCard;
     }
 
-    public GameObject getCard(Dictionary<Guid, GameObject> cardsInScene, Card card, Transform parent, Action<SimpleCard> _clickAction)
+    public GameObject getCard(Dictionary<Guid, GameObject> cardsInScene, Card card, Transform parent)
     {
         if (!cardsInScene.ContainsKey(card.guid))
-            cardsInScene[card.guid] = this.createCard(card, parent, _clickAction);
-        cardsInScene[card.guid].GetComponent<SimpleCard>().UpdateClickAction(_clickAction);
+            cardsInScene[card.guid] = this.createCard(card, parent);
+
         return cardsInScene[card.guid];
     }
 
