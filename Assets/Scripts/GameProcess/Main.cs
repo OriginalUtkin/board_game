@@ -10,8 +10,6 @@ public class Main : MonoBehaviour
     public GameObject playerHand;
     public GameObject playerBattlefield;
 
-    private SimpleCard selectedCard;
-
     private PreparationLogicHolder preparationLogicHolder;
     // used for debugging
     public PreparationLogicHolder preparationLogicHolderPrefab;
@@ -31,7 +29,7 @@ public class Main : MonoBehaviour
         PreparationLogicHolder holder = Instantiate(preparationLogicHolderPrefab, null);
         holder.name = "PreparationLogicHolder";
 
-        PreparationLogic logic = PreparationLogic.LoadFromFile(System.IO.Path.Combine(gameObject.scene.path, "../playerSelection.xml"));
+        PreparationLogic logic = PreparationLogic.LoadFromFile(System.IO.Path.Combine(gameObject.scene.path, "../debug/playerPreparation.xml"));
         holder.player1Preparation = logic;
         return holder;
     }
@@ -53,12 +51,10 @@ public class Main : MonoBehaviour
         return holder;
     }
 
-
     void Start()
     {
         this.preparationLogicHolder = this.GetHolder();
         this.initialisePlayerHand();
-        this.initialisePlayerBattlefield();
     }
 
     private void initialisePlayerHand()
@@ -67,31 +63,6 @@ public class Main : MonoBehaviour
         HandDrower handDrower = this.playerHand.GetComponent<HandDrower>();
 
         Vector3 startCardPosition = HandDrower.calculateStartHandPosition(handPositionCoordinate: this.HandPosition);
-        handDrower.fillStartHand(cardParent: this.playerHand, cardPosition: startCardPosition,
-            cards: cards, cardsInScene: cardsInScene, clickAction: this.SelectCard);
-    }
-
-    private void initialisePlayerBattlefield()
-    {
-        /* Setup card movement action for the battlefield. */
-        PlayerBattlefield playArea = this.playerBattlefield.GetComponent<PlayerBattlefield>();
-        playArea.ClickAction = this.clickBattlefield;
-    }
-
-    public void SelectCard(SimpleCard card)
-    {
-        Debug.Log("Select card: " + card);
-        this.selectedCard = card;
-    }
-
-    public void clickBattlefield(PlayerBattlefield battlefield)
-    {
-        if (this.selectedCard != null)
-        {
-            this.selectedCard.transform.SetParent(battlefield.playerSlots[battlefield.NextCardPosition].transform);
-            this.selectedCard.transform.position = battlefield.playerSlots[battlefield.NextCardPosition].transform.position;
-
-            battlefield.NextCardPosition += 1;
-        }
+        handDrower.fillStartHand(cardParent: this.playerHand, cardPosition: startCardPosition, cards: cards, cardsInScene: cardsInScene);
     }
 }
