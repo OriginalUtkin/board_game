@@ -28,7 +28,7 @@ public class SimpleCard : MonoBehaviour
         IInteractable? collisionObject = this.GetColissionObject();
 
         if (collisionObject == null)
-            this.PutCardToHand();
+            this.ResetPosition();
         else
             collisionObject.ReceiveObject(this);
     }
@@ -67,7 +67,7 @@ public class SimpleCard : MonoBehaviour
         return collisionObject;
     }
 
-    private void PutCardToHand()
+    private void ResetPosition()
     {
 
     }
