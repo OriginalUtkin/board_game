@@ -8,9 +8,6 @@ public class HandDrower : MonoBehaviour
 {
     public readonly static int initialDrawSize = 3;
     public readonly static int handLimit = 5;
-
-    public GameObject simpleCardPrefab;
-    public GameObject[] facesPrefabs;
     public CardCreator cardCreator;
 
     public static Vector3 calculateStartHandPosition(Vector3 handPositionCoordinate)
