@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CardCreator : MonoBehaviour
 {
-    public GameObject simpleCardPrefab;
+    public GameObject cardPrefab;
     public GameObject[] facesPrefabs;
 
     Dictionary<string, GameObject> facesPrefabsDict = new Dictionary<string, GameObject>();
@@ -22,7 +22,7 @@ public class CardCreator : MonoBehaviour
 
     public GameObject createCard(Card card, Transform parent)
     {
-        GameObject newCard = Instantiate(simpleCardPrefab, parent);
+        GameObject newCard = Instantiate(cardPrefab, parent);
         newCard.GetComponent<SimpleCard>().Setup(facesPrefabsDict[card.Name], card.guid);
         return newCard;
     }
