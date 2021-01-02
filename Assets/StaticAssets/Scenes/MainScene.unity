@@ -390,9 +390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84034b9db1f654c149b438c775bf7560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simpleCardPrefab: {fileID: 696801792466627560, guid: 45bb52c3473f449e2996068196793744, type: 3}
-  facesPrefabs:
-  - {fileID: 1413699333538855551, guid: 6471e7bd121804d85b7c271fa6280f4b, type: 3}
   cardCreator: {fileID: 1682024204}
 --- !u!1 &576195388
 GameObject:
@@ -1088,5 +1085,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardCreator
       objectReference: {fileID: 0}
+    - target: {fileID: 262563990072792517, guid: 2d7c53dc20d8546e3b7ce1f66a900a4c, type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 696801792466627560, guid: 45bb52c3473f449e2996068196793744, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d7c53dc20d8546e3b7ce1f66a900a4c, type: 3}
