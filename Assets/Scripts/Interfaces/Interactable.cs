@@ -5,5 +5,5 @@ using BoardGame.Cards;
 using UnityEngine;
 interface IInteractable
 {
-    void RecieveObject(MonoBehaviour obj);
+    void ReceiveObject(MonoBehaviour obj);
 }

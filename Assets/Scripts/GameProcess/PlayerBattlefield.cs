@@ -16,9 +16,9 @@ public class PlayerBattlefield : MonoBehaviour, IInteractable
         Debug.Log("Player battlefield is clicked");
     }
 
-    public void RecieveObject(MonoBehaviour obj)
+    public void ReceiveObject(MonoBehaviour obj)
     {
-        Debug.Log("Object is recieved");
+        Debug.Log("Object is received");
     }
 
 }

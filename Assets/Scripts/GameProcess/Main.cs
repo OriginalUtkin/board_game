@@ -29,7 +29,7 @@ public class Main : MonoBehaviour
         PreparationLogicHolder holder = Instantiate(preparationLogicHolderPrefab, null);
         holder.name = "PreparationLogicHolder";
 
-        PreparationLogic logic = PreparationLogic.LoadFromFile(System.IO.Path.Combine(gameObject.scene.path, "../debug/playerPreparation.xml"));
+        PreparationLogic logic = PreparationLogic.LoadFromFile(System.IO.Path.Combine(gameObject.scene.path, "../playerSelection.xml"));
         holder.player1Preparation = logic;
         return holder;
     }
