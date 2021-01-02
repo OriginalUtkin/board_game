@@ -30,7 +30,7 @@ public class SimpleCard : MonoBehaviour
         if (collisionObject == null)
             this.PutCardToHand();
         else
-            collisionObject.RecieveObject(this);
+            collisionObject.ReceiveObject(this);
     }
 
     private void Update()
@@ -39,8 +39,8 @@ public class SimpleCard : MonoBehaviour
         {
             Debug.Log("Mouse button is clicked; Updating card position " + this.cardGuid);
 
-            Vector3 coursorePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            this.transform.position = new Vector3(coursorePosition.x, coursorePosition.y, -5.0f);
+            Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            this.transform.position = new Vector3(cursorPosition.x, cursorPosition.y, -5.0f);
 
             Debug.Log("Mouse position " + Input.mousePosition + " Card position " + this.transform.position);
         }
@@ -59,7 +59,7 @@ public class SimpleCard : MonoBehaviour
 
         Debug.DrawRay(this.transform.position, transform.TransformDirection(Vector3.forward) * 20.0f, isHit ? Color.yellow : Color.red);
 
-        if (hit.collider == null)
+        if (!isHit)
             return null;
 
         IInteractable collisionObject = (IInteractable)hit.collider.GetComponent(hit.collider.name);
