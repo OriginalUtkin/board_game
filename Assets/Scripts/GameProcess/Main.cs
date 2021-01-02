@@ -61,9 +61,9 @@ public class Main : MonoBehaviour
     private void initialisePlayerHand()
     {
         /* Calculate player hand start position and fill it with cards. */
-        HandDrower handDrower = this.playerHand.GetComponent<HandDrower>();
+        PlayerHand han = this.playerHand.GetComponent<PlayerHand>();
 
-        Vector3 startCardPosition = HandDrower.calculateStartHandPosition(handPositionCoordinate: this.HandPosition);
-        handDrower.fillStartHand(cardParent: this.playerHand, cardPosition: startCardPosition, cards: cards, cardsInScene: cardsInScene);
+        Vector3 startCardPosition = PlayerHand.calculateStartHandPosition(handPositionCoordinate: this.HandPosition);
+        han.fillStartHand(cardParent: this.playerHand, cardPosition: startCardPosition, cards: cards, cardsInScene: cardsInScene);
     }
 }

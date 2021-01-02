@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using BoardGame.Cards;
 using UnityEngine;
 
-public class HandDrower : MonoBehaviour
+public class PlayerHand : MonoBehaviour
 {
     public readonly static int initialDrawSize = 3;
     public readonly static int handLimit = 5;
+
     public CardCreator cardCreator;
 
     public static Vector3 calculateStartHandPosition(Vector3 handPositionCoordinate)
     {
-        int left_side = HandDrower.handLimit / 2;
+        int left_side = PlayerHand.handLimit / 2;
         return handPositionCoordinate + Vector3.left * left_side * 1.5f;
     }
 
@@ -21,7 +22,7 @@ public class HandDrower : MonoBehaviour
     {
         int offset = 2;
 
-        for (int card_counter = 0; card_counter < HandDrower.initialDrawSize; card_counter++)
+        for (int card_counter = 0; card_counter < PlayerHand.initialDrawSize; card_counter++)
         {
             if (!cardsInScene.ContainsKey(cards[card_counter].guid))
                 cardsInScene[cards[card_counter].guid] = cardCreator.createCard(cards[card_counter], cardParent.transform);
