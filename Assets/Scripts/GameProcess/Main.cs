@@ -31,6 +31,7 @@ public class Main : MonoBehaviour
 
         PreparationLogic logic = PreparationLogic.LoadFromFile(System.IO.Path.Combine(gameObject.scene.path, "../playerSelection.xml"));
         holder.player1Preparation = logic;
+        
         return holder;
     }
 
