@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BoardGame.Cards;
 using UnityEngine;
-interface IInteractable{
+interface IInteractable
+{
     void RecieveObject(MonoBehaviour obj);
 }
