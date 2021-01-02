@@ -7,13 +7,13 @@ using UnityEngine;
 public class PlayerHand : MonoBehaviour
 {
     public readonly static int initialDrawSize = 3;
-    public readonly static int handLimit = 5;
+    public readonly static int cardsLimit = 5;
 
     public CardCreator cardCreator;
 
     public static Vector3 calculateStartHandPosition(Vector3 handPositionCoordinate)
     {
-        int left_side = PlayerHand.handLimit / 2;
+        int left_side = PlayerHand.initialDrawSize / 2;
         return handPositionCoordinate + Vector3.left * left_side * 1.5f;
     }
 
