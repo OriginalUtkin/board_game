@@ -24,7 +24,7 @@ VS doesn’t have autocomplete functionality for Unity from the beginning. In or
 * Install MONO ([link](https://www.mono-project.com/download/stable/#download-mac))
 * Install C# extension for VS code ([link](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp))
 * Open Extension Setting for installed extension in previous step
-* Set Omnisharp: Use Global Mono to always (In case there is button with selecting path, add there path to the settings.json in project)
+* Set `Omnisharp: Use Global Mono` to `always` value (In case there is button with selecting path, add there path to the `settings.json` in project)
 
 ### 3rd party dependencies
 
