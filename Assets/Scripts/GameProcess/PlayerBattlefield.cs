@@ -6,23 +6,22 @@ using UnityEngine;
 public class PlayerBattlefield : MonoBehaviour, IInteractable
 {
     public GameObject[] playerSlots;
-
     private const int Capacity = 5;
-
+    private const int BattlefieldCenter = PlayerBattlefield.Capacity / 2;
     private int AvailableSpots { get; set; } = PlayerBattlefield.Capacity;
+    private bool IsEmpty => (this.AvailableSpots == PlayerBattlefield.Capacity);
 
-    private void OnMouseDown()
+    public bool IsReceivable()
     {
-        Debug.Log("Player battlefield is clicked");
+        return this.AvailableSpots > 0;
     }
-
     public void ReceiveObject(MonoBehaviour obj)
     {
         Debug.Log("Object is received");
         int cardPosition;
 
-        if (this.AvailableSpots == PlayerBattlefield.Capacity)
-            cardPosition = PlayerBattlefield.Capacity / 2;
+        if (this.IsEmpty)
+            cardPosition = PlayerBattlefield.BattlefieldCenter;
         else
             cardPosition = this.CalculateCardPosition();
 
@@ -54,10 +53,4 @@ public class PlayerBattlefield : MonoBehaviour, IInteractable
 
         return closestIndex;
     }
-
-    public bool IsReceivable()
-    {
-        return this.AvailableSpots > 0;
-    }
-
 }
