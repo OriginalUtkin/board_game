@@ -27,7 +27,7 @@ public class SimpleCard : MonoBehaviour
         this.isSelected = false;
         IInteractable? collisionObject = this.GetColissionObject();
 
-        if (collisionObject == null)
+        if (collisionObject == null || !collisionObject.IsReceivable())
             this.ResetPosition();
         else
             collisionObject.ReceiveObject(this);
@@ -37,12 +37,12 @@ public class SimpleCard : MonoBehaviour
     {
         if (this.isSelected)
         {
-            Debug.Log("Mouse button is clicked; Updating card position " + this.cardGuid);
+            // Debug.Log("Mouse button is clicked; Updating card position " + this.cardGuid);
 
             Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             this.transform.position = new Vector3(cursorPosition.x, cursorPosition.y, -5.0f);
 
-            Debug.Log("Mouse position " + Input.mousePosition + " Card position " + this.transform.position);
+            // Debug.Log("Mouse position " + Input.mousePosition + " Card position " + this.transform.position);
         }
     }
 
