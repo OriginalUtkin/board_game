@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class Movable : IState
 {
 
@@ -38,7 +37,6 @@ public class Movable : IState
         if (this.card.isSelected)
         {
             // Debug.Log("Mouse button is clicked; Updating card position " + this.cardGuid);
-
             Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             this.card.transform.position = new Vector3(cursorPosition.x, cursorPosition.y, -5.0f);
 
@@ -62,7 +60,7 @@ public class Movable : IState
         if (!isHit)
             return null;
 
-        IInteractable collisionObject = (IInteractable)hit.collider.GetComponent(hit.collider.name);
+        IInteractable collisionObject = (IInteractable)hit.transform.gameObject.GetComponent(typeof(IInteractable));
 
         return collisionObject;
     }

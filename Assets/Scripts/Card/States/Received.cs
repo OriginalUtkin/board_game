@@ -23,6 +23,5 @@ public class Received : IState
     public void Update()
     {
         // Debug.Log("Log message");
-
     }
 }
