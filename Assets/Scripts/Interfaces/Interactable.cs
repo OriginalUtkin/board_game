@@ -6,4 +6,5 @@ using UnityEngine;
 interface IInteractable
 {
     void ReceiveObject(MonoBehaviour obj);
+    bool IsReceivable();
 }
