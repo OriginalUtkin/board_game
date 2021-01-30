@@ -9,7 +9,7 @@ public class PlayerBattlefield : MonoBehaviour, IInteractable
     private int AvailableSpots { get; set; } = PlayerBattlefield.Capacity;
     private bool IsEmpty => (this.AvailableSpots == PlayerBattlefield.Capacity);
 
-    public bool IsReceivable()
+    public bool IsReceivable(MonoBehaviour obj)
     {
         return this.AvailableSpots > 0;
     }

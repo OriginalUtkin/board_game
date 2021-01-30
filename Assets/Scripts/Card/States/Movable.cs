@@ -5,6 +5,8 @@ public class Movable : IState
 {
 
     public SimpleCard card { get; set; }
+    public Vector3 startingPosition { get; set; }
+
     public Movable(SimpleCard _card)
     {
         this.card = _card;
@@ -12,6 +14,7 @@ public class Movable : IState
     public void OnMouseDown()
     {
         this.card.isSelected = true;
+        startingPosition = this.card.transform.position;
     }
 
     public void OnMouseUp()
@@ -21,12 +24,12 @@ public class Movable : IState
         this.card.isSelected = false;
         IInteractable? collisionObject = this.GetColissionObject();
 
-        if (collisionObject == null || !collisionObject.IsReceivable())
-            this.card.ResetPosition();
+        if (collisionObject == null || !collisionObject.IsReceivable(this.card))
+            this.card.ResetPosition(startingPosition);
         else
         {
-            collisionObject.ReceiveObject(this.card);
             this.card.state = new Received(this.card);
+            collisionObject.ReceiveObject(this.card);
         }
     }
 

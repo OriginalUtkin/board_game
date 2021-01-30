@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using BoardGame.Cards;
 using UnityEngine;
 
-public class CardCollection : MonoBehaviour
+public class CardCollection : MonoBehaviour, IInteractable
 {
     public CardCreator cardCreator;
     public PreparationMain preparationMain;
@@ -34,5 +34,29 @@ public class CardCollection : MonoBehaviour
             currentRowSize++;
         }
     }
+
+
+    public void ReceiveObject(MonoBehaviour obj)
+    {
+        SimpleCard card = obj.GetComponent<SimpleCard>();
+        if (card == null)
+            return;
+
+        Debug.Log("CardCollection.ReceivedCard", card);
+        preparationMain.MoveCardToCollection(card);
+        card.state = new Movable(card);
+    }
+
+    public bool IsReceivable(MonoBehaviour obj)
+    {
+        SimpleCard[] currentCards = GetComponentsInChildren<SimpleCard>();
+
+        foreach (SimpleCard card in currentCards)
+            if (card.gameObject == obj.gameObject)
+                return false;
+
+        return true;
+    }
+
 
 }
