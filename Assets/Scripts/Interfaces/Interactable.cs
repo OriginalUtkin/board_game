@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using BoardGame.Cards;
 using UnityEngine;
-interface IInteractable
+public interface IInteractable
 {
     void ReceiveObject(MonoBehaviour obj);
     bool IsReceivable();
