@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class SimpleCard : MonoBehaviour
+public class SimpleCard : MonoBehaviour, IInteractable
 {
     GameObject cardFace;
     public Guid cardGuid;
@@ -30,15 +30,21 @@ public class SimpleCard : MonoBehaviour
         this.state.Update();
     }
 
-<<<<<<< HEAD
     public void ResetPosition(Vector3 startingPosition)
     {
         Debug.Log("SimpleCard.ResetPosition");
         this.transform.position = startingPosition;
-=======
-    public void ResetPosition()
-    {
+    }
 
->>>>>>> Implement possible card states
+    public bool IsReceivable(MonoBehaviour obj)
+    {
+        Debug.Log("Card could not recieve any objects yet");
+
+        return false;
+    }
+
+    public void ReceiveObject(MonoBehaviour obj)
+    {
+        throw new NotImplementedException();
     }
 }
