@@ -30,9 +30,15 @@ public class SimpleCard : MonoBehaviour
         this.state.Update();
     }
 
+<<<<<<< HEAD
     public void ResetPosition(Vector3 startingPosition)
     {
         Debug.Log("SimpleCard.ResetPosition");
         this.transform.position = startingPosition;
+=======
+    public void ResetPosition()
+    {
+
+>>>>>>> Implement possible card states
     }
 }

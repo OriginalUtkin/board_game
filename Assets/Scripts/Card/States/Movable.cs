@@ -1,6 +1,7 @@
 using UnityEngine;
 
 
+<<<<<<< HEAD
 public class Movable : IState
 {
 
@@ -9,12 +10,21 @@ public class Movable : IState
 
     public Movable(SimpleCard _card)
     {
+=======
+public class Movable: IState{
+
+    public SimpleCard card {get; set;}
+    public Movable(SimpleCard _card){
+>>>>>>> Implement possible card states
         this.card = _card;
     }
     public void OnMouseDown()
     {
         this.card.isSelected = true;
+<<<<<<< HEAD
         startingPosition = this.card.transform.position;
+=======
+>>>>>>> Implement possible card states
     }
 
     public void OnMouseUp()
@@ -24,6 +34,7 @@ public class Movable : IState
         this.card.isSelected = false;
         IInteractable? collisionObject = this.GetColissionObject();
 
+<<<<<<< HEAD
         if (collisionObject == null || !collisionObject.IsReceivable(this.card))
             this.card.ResetPosition(startingPosition);
         else
@@ -31,6 +42,14 @@ public class Movable : IState
             this.card.state = new Received(this.card);
             collisionObject.ReceiveObject(this.card);
         }
+=======
+        if (collisionObject == null || !collisionObject.IsReceivable())
+            this.card.ResetPosition();
+        else{
+            collisionObject.ReceiveObject(this.card);
+            this.card.state = new Received(this.card);       
+        }   
+>>>>>>> Implement possible card states
     }
 
     public void Update()
@@ -66,4 +85,8 @@ public class Movable : IState
 
         return collisionObject;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Implement possible card states
