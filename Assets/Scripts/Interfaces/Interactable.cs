@@ -2,5 +2,5 @@ using UnityEngine;
 public interface IInteractable
 {
     void ReceiveObject(MonoBehaviour obj);
-    bool IsReceivable();
+    bool IsReceivable(MonoBehaviour obj);
 }
