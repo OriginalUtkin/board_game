@@ -9,8 +9,6 @@ public class PlayerHand : MonoBehaviour
     public readonly static int initialDrawSize = 3;
     public readonly static int cardsLimit = 5;
 
-    public CardCreator cardCreator;
-
     public static Vector3 calculateStartHandPosition(Vector3 handPositionCoordinate)
     {
         int left_side = PlayerHand.initialDrawSize / 2;
@@ -25,7 +23,7 @@ public class PlayerHand : MonoBehaviour
         for (int card_counter = 0; card_counter < PlayerHand.initialDrawSize; card_counter++)
         {
             if (!cardsInScene.ContainsKey(cards[card_counter].guid))
-                cardsInScene[cards[card_counter].guid] = cardCreator.createCard(cards[card_counter], cardParent.transform);
+                cardsInScene[cards[card_counter].guid] = CardCreator.Instance.createCard(cards[card_counter], cardParent.transform);
 
             GameObject newCard = cardsInScene[cards[card_counter].guid];
             newCard.transform.position = cardPosition;

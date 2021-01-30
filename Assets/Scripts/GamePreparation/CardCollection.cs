@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class CardCollection : MonoBehaviour, IInteractable
 {
-    public CardCreator cardCreator;
-    public PreparationMain preparationMain;
     public int rowSize = 4;
     public float xOffset = -1.72f;
     public float yOffset = 1.72f;
@@ -26,7 +24,7 @@ public class CardCollection : MonoBehaviour, IInteractable
                 currentRowSize = 0;
             }
 
-            GameObject cardObj = cardCreator.getCard(cardsInScene, cards[i], transform);
+            GameObject cardObj = CardCreator.Instance.getCard(cardsInScene, cards[i], transform);
 
             cardObj.transform.parent = transform;
             cardObj.transform.localPosition = xOffset * currentRowSize * Vector3.right;
@@ -43,7 +41,7 @@ public class CardCollection : MonoBehaviour, IInteractable
             return;
 
         Debug.Log("CardCollection.ReceivedCard", card);
-        preparationMain.MoveCardToCollection(card);
+        PreparationMain.Instance.MoveCardToCollection(card);
         card.state = new Movable(card);
     }
 

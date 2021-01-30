@@ -5,8 +5,6 @@ using BoardGame.Cards;
 using UnityEngine;
 public class PlayerSelection : MonoBehaviour, IInteractable
 {
-    public PreparationMain preparationMain;
-    public CardCreator cardCreator;
     public float yOffset = 1.72f;
 
 
@@ -14,7 +12,7 @@ public class PlayerSelection : MonoBehaviour, IInteractable
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            GameObject cardObj = cardCreator.getCard(cardsInScene, cards[i], transform);
+            GameObject cardObj = CardCreator.Instance.getCard(cardsInScene, cards[i], transform);
 
             cardObj.transform.parent = transform;
             cardObj.transform.localPosition = yOffset * i * Vector3.down;
@@ -28,7 +26,7 @@ public class PlayerSelection : MonoBehaviour, IInteractable
             return;
 
         Debug.Log("PlayerSelection.ReceivedCard", card);
-        preparationMain.MoveCardToPlayerSelection(card);
+        PreparationMain.Instance.MoveCardToPlayerSelection(card);
         card.state = new Movable(card);
     }
 
