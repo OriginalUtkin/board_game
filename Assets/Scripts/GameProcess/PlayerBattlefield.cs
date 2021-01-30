@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
 public class PlayerBattlefield : MonoBehaviour, IInteractable
 {
     public GameObject[] playerSlots;
@@ -33,21 +31,12 @@ public class PlayerBattlefield : MonoBehaviour, IInteractable
     private int CalculateCardPosition()
     {
         Debug.Log("Calculating spot coordinates");
+
         Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        double closestDistance = Vector3.Distance(this.playerSlots[0].transform.position, cursorPosition);
-        int closestIndex = 0;
-
-        for (int i = 1; i < this.playerSlots.Length; i++)
-        {
-            double distance = Vector3.Distance(this.playerSlots[i].transform.position, cursorPosition);
-
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestIndex = i;
-            }
-        }
+        List<float> distances = this.playerSlots.Select(
+                slot => Vector3.Distance(slot.transform.position, cursorPosition)
+            ).ToList();
+        int closestIndex = distances.IndexOf(distances.Min());
 
         Debug.Log("Closest slot is " + closestIndex);
 
