@@ -13,6 +13,19 @@ public class PreparationMain : MonoBehaviour
 
     public int playerSelectionSize = 5;
 
+    static private PreparationMain _instance;
+    static public PreparationMain Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<PreparationMain>();
+            }
+            return _instance;
+        }
+    }
+
     public CardCollection cardCollection;
     public PlayerSelection playerSelection;
     public Button backButton;

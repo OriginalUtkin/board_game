@@ -6,6 +6,19 @@ using UnityEngine;
 
 public class CardCreator : MonoBehaviour
 {
+    static private CardCreator _instance;
+    static public CardCreator Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<CardCreator>();
+            }
+            return _instance;
+        }
+    }
+
     public GameObject cardPrefab;
     public GameObject[] facesPrefabs;
 
