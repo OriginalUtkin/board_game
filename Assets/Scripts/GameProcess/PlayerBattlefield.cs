@@ -23,6 +23,7 @@ public class PlayerBattlefield : MonoBehaviour, IInteractable
         else
             cardPosition = this.CalculateCardPosition();
 
+        obj.transform.parent = this.playerSlots[cardPosition].transform;
         obj.transform.position = this.playerSlots[cardPosition].transform.position;
 
         this.AvailableSpots -= 1;
@@ -33,13 +34,27 @@ public class PlayerBattlefield : MonoBehaviour, IInteractable
         Debug.Log("Calculating spot coordinates");
 
         Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        List<float> distances = this.playerSlots.Select(
-                slot => Vector3.Distance(slot.transform.position, cursorPosition)
-            ).ToList();
-        int closestIndex = distances.IndexOf(distances.Min());
+        Dictionary<int, float> spotsDistances = this.GetAvailableSpots(cursorPosition);
 
-        Debug.Log("Closest slot is " + closestIndex);
+        var closestIndex = spotsDistances.OrderBy(elem => elem.Value).First();
 
-        return closestIndex;
+        Debug.Log("Closest slot is " + closestIndex.Key);
+
+        return closestIndex.Key;
+    }
+
+    private Dictionary<int, float> GetAvailableSpots(Vector3 cursorPosition)
+    {
+        Dictionary<int, float> availableSlots = new Dictionary<int, float>();
+
+        for (int element_index = 0; element_index < this.playerSlots.Length; element_index++)
+        {
+            GameObject currentSlot = this.playerSlots[element_index];
+
+            if (currentSlot.GetComponentInChildren(typeof(SimpleCard)) == null)
+                availableSlots[element_index] = Vector3.Distance(currentSlot.transform.position, cursorPosition);
+        }
+
+        return availableSlots;
     }
 }
