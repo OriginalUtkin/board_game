@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using BoardGame.Cards;
+using BoardGame.Networking;
 using BoardGame.Preparation;
 using UnityEngine;
 
-public class Main : MonoBehaviour
+public class Main : MonoBehaviour, INetworkMessageHandler
 {
     public GameObject playerHand;
     public GameObject playerBattlefield;
@@ -21,6 +22,8 @@ public class Main : MonoBehaviour
     {
         get { return this.playerHand.transform.position; }
     }
+
+    public NetLogic netLogic = new NetLogic();
 
     private PreparationLogicHolder LoadPlayerSelection()
     {
@@ -54,6 +57,9 @@ public class Main : MonoBehaviour
 
     void Start()
     {
+        // netLogic.server_message_handlers.Add("init_client", HandleInitMessage);
+        netLogic.messageHandler = this;
+
         this.preparationLogicHolder = this.GetHolder();
         this.initialisePlayerHand();
     }
@@ -65,5 +71,21 @@ public class Main : MonoBehaviour
 
         Vector3 startCardPosition = PlayerHand.calculateStartHandPosition(handPositionCoordinate: this.HandPosition);
         hand.fillStartHand(cardParent: this.playerHand, cardPosition: startCardPosition, cards: cards, cardsInScene: cardsInScene);
+    }
+
+    public void handleInitClient(InitClientMessage message)
+    {
+        Debug.Log(String.Format("HandleInitMessage: client_id = {0}", message.client_id));
+    }
+
+    void Update()
+    {
+        netLogic.Update();
+        netLogic.client.SendReceive();
+    }
+
+    void OnApplicationQuit()
+    {
+        netLogic.OnApplicationQuit();
     }
 }
