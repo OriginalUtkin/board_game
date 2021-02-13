@@ -16,20 +16,20 @@ public class PlayerBattlefield : MonoBehaviour, IInteractable
     public void ReceiveObject(MonoBehaviour obj)
     {
         Debug.Log("Object is received");
-        int cardPosition;
+        GameObject spot;
 
         if (this.IsEmpty)
-            cardPosition = PlayerBattlefield.BattlefieldCenter;
+            spot = this.playerSlots[PlayerBattlefield.BattlefieldCenter];
         else
-            cardPosition = this.CalculateCardPosition();
+            spot = this.GetClosestSpot();
 
-        obj.transform.parent = this.playerSlots[cardPosition].transform;
-        obj.transform.position = this.playerSlots[cardPosition].transform.position;
+        obj.transform.parent = spot.transform;
+        obj.transform.position = spot.transform.position;
 
         this.AvailableSpots -= 1;
     }
 
-    private int CalculateCardPosition()
+    private GameObject GetClosestSpot()
     {
         Debug.Log("Calculating spot coordinates");
 
@@ -40,7 +40,7 @@ public class PlayerBattlefield : MonoBehaviour, IInteractable
 
         Debug.Log("Closest slot is " + closestIndex.Key);
 
-        return closestIndex.Key;
+        return this.playerSlots[closestIndex.Key];
     }
 
     private Dictionary<int, float> GetAvailableSpots(Vector3 cursorPosition)
